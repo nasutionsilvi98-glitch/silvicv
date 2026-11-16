@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV & Portofolio - Nadia Putri Maharani</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon Profesional -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        lavender: {
+                            50: '#faf8ff',
+                            100: '#f3edff',
+                            200: '#e9d8fd',
+                            300: '#d6bcfa',
+                            400: '#b794f4',
+                            500: '#9f7aea',
+                            600: '#805ad5',
+                            700: '#6b46c1',
+                            800: '#553c9a',
+                            900: '#44337a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Kustomisasi Scrollbar Lembut */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf8ff;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6bcfa;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9f7aea;
+        }
+
+        /* Gaya Khusus untuk Cetak / Simpan PDF */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 12mm 14mm;
+            }
+
+            body {
+                background-color: #ffffff !important;
+                color: #1f2937 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                font-size: 11pt !important;
+            }
+
+            /* Sembunyikan elemen navigasi, tombol aksi, modal, dan footer interaktif */
+            .no-print {
+                display: none !important;
+            }
+
+            /* Sesuaikan tata letak kartu agar menyatu rapi di kertas A4 */
+            .print-container {
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .print-card {
+                box-shadow: none !important;
+                border: 1px solid #e9d8fd !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 14px !important;
+                padding: 16px !important;
+            }
+
+            .print-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 2fr !important;
+                gap: 16px !important;
+            }
+
+            .print-header {
+                background: linear-gradient(135deg, #f3edff 0%, #faf8ff 100%) !important;
+                border: 1px solid #d6bcfa !important;
+                padding: 20px !important;
+                margin-bottom: 16px !important;
+            }
+
+            /* Pastikan progress bar tercetak dengan warna ungu */
+            .skill-bar-fill {
+                background-color: #805ad5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-lavender-50 text-slate-700 font-sans antialiased selection:bg-lavender-200 selection:text-lavender-900">
+
+    <!-- Navbar Mengambang (Disembunyikan saat Print) -->
+    <nav class="no-print sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-lavender-100 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-lavender-600 to-purple-400 flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm group-hover:scale-105 transition">
+                    N
+                </div>
+                <span class="font-serif font-bold text-lavender-950 text-lg tracking-tight">Nadia<span class="text-lavender-600">.cv</span></span>
+            </a>
+
+            <!-- Menu Navigasi Desktop -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="#tentang" class="hover:text-lavender-700 transition">Tentang</a>
+                <a href="#pengalaman" class="hover:text-lavender-700 transition">Pengalaman</a>
+                <a href="#keahlian" class="hover:text-lavender-700 transition">Keahlian</a>
+                <a href="#portofolio" class="hover:text-lavender-700 transition">Portofolio</a>
+                <a href="#kontak" class="hover:text-lavender-700 transition">Kontak</a>
+            </div>
+
+            <!-- Tombol Aksi Cepat -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="openEditModal()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs sm:text-sm font-medium text-lavender-700 bg-lavender-100 hover:bg-lavender-200 transition cursor-pointer" title="Sesuaikan Data CV">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Edit Cepat</span>
+                </button>
+                <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-lavender-600 to-purple-600 hover:from-lavender-700 hover:to-purple-700 shadow-md shadow-lavender-300/50 transition cursor-pointer">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Cetak / PDF</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Kontainer Utama CV -->
+    <main class="print-container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <!-- 1. HEADER PROFIL -->
+        <header class="print-header relative overflow-hidden bg-white rounded-3xl shadow-xl shadow-lavender-200/40 border border-lavender-100 p-6 sm:p-10 mb-8">
+            <!-- Dekorasi Latar Belakang Estetik -->
+            <div class="no-print absolute -top-24 -right-24 w-72 h-72 bg-gradient-to-br from-lavender-200/60 to-pink-100/50 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="no-print absolute -bottom-24 -left-24 w-64 h-64 bg-gradient-to-tr from-purple-200/50 to-lavender-100/50 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8 text-center md:text-left">
+                <!-- Foto Profil Estetik -->
+                <div class="relative shrink-0">
+                    <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full p-1.5 bg-gradient-to-tr from-lavender-500 via-purple-400 to-pink-300 shadow-lg">
+                        <img id="cv-photo" 
+                             src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x400/e9d8fd/553c9a?text=Nadia+Putri';" 
+                             alt="Foto Profil Nadia Putri Maharani" 
+                             class="w-full h-full object-cover rounded-full border-4 border-white">
+                    </div>
+                    <span class="no-print absolute bottom-2 right-2 bg-emerald-500 w-4 h-4 rounded-full border-2 border-white shadow" title="Siap Bekerja / Open to Work"></span>
+                </div>
+
+                <!-- Informasi Utama -->
+                <div class="flex-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lavender-100 text-lavender-800 text-xs font-semibold tracking-wide uppercase mb-3">
+                        <i class="fa-solid fa-sparkles text-lavender-600"></i>
+                        <span>Siap Bekerja • Full-Time / Hybrid</span>
+                    </div>
+
+                    <h1 id="cv-name" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-2">
+                        Nadia Putri Maharani, S.Kom.
+                    </h1>
+
+                    <p id="cv-role" class="text-lg sm:text-xl font-semibold text-lavender-700 mb-4">
+                        UI/UX Designer &amp; Digital Brand Strategist
+                    </p>
+
+                    <p id="cv-tagline" class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mb-6">
+                        Profesional kreatif dengan pengalaman lebih dari 3 tahun dalam merancang antarmuka digital yang intuitif, estetis, dan berpusat pada pengguna. Berdedikasi membantu perusahaan membangun identitas visual yang kuat serta meningkatkan konversi produk digital.
+                    </p>
+
+                    <!-- Info Kontak Singkat (Tampil Rapi di Web & Print) -->
+                    <div class="flex flex-wrap justify-center md:justify-start gap-y-2 gap-x-5 text-xs sm:text-sm text-slate-600 mb-6">
+                        <span class="inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-lavender-600"></i>
+                            <span id="cv-location">Jakarta Selatan, Indonesia</span>
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-envelope text-lavender-600"></i>
+                            <span id="cv-email-text">nadia.maharani@email.com</span>
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-lavender-600"></i>
+                            <span id="cv-phone-text">+62 812-3456-7890</span>
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <i class="fa-brands fa-linkedin text-lavender-600"></i>
+                            <span id="cv-linkedin-text">linkedin.com/in/nadiaputrim</span>
+                        </span>
+                    </div>
+
+                    <!-- Tombol Aksi Header (Disembunyikan saat Print) -->
+                    <div class="no-print flex flex-wrap justify-center md:justify-start gap-3">
+                        <a href="#kontak" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-lavender-700 hover:bg-lavender-800 text-white text-sm font-semibold shadow-md shadow-lavender-300/60 transition">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Hubungi Saya</span>
+                        </a>
+                        <button onclick="window.print()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-lavender-50 text-lavender-800 border border-lavender-300 text-sm font-semibold transition cursor-pointer">
+                            <i class="fa-solid fa-print"></i>
+                            <span>Cetak / Simpan PDF</span>
+                        </button>
+                        <button onclick="copyContactInfo()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-lavender-100/70 hover:bg-lavender-200/70 text-lavender-800 text-sm font-medium transition cursor-pointer" title="Salin Email & Nomor HP">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Salin Kontak</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- GRID DUA KOLOM UTAMA -->
+        <div class="print-grid grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- KOLOM KIRI (4 Kolom di Desktop): Tentang, Keahlian, Pendidikan, Bahasa -->
+            <aside class="lg:col-span-4 space-y-6">
+
+                <!-- 2. TENTANG SAYA (ABOUT ME) -->
+                <section id="tentang" class="print-card bg-white rounded-3xl p-6 shadow-md shadow-lavender-100/60 border border-lavender-100">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <div class="w-8 h-8 rounded-xl bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                            <i class="fa-solid fa-user-tie text-sm"></i>
+                        </div>
+                        <h2 class="font-serif text-xl font-bold text-slate-900">Tentang Saya</h2>
+                    </div>
+                    <p id="cv-about" class="text-sm text-slate-600 leading-relaxed">
+                        Saya adalah lulusan Ilmu Komputer yang memiliki ketertarikan mendalam pada psikologi pengguna dan estetika desain modern. Terbiasa bekerja dalam tim lintas fungsi (Agile/Scrum), teliti terhadap detail, komunikatif, serta mampu menerjemahkan kebutuhan bisnis menjadi solusi visual yang elegan dan fungsional.
+                    </p>
+                </section>
+
+                <!-- 3. KEAHLIAN (SKILLS) -->
+                <section id="keahlian" class="print-card bg-white rounded-3xl p-6 shadow-md shadow-lavender-100/60 border border-lavender-100">
+                    <div class="flex items-center gap-2.5 mb-5">
+                        <div class="w-8 h-8 rounded-xl bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                            <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                        </div>
+                        <h2 class="font-serif text-xl font-bold text-slate-900">Keahlian Utama</h2>
+                    </div>
+
+                    <!-- Progress Bars -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1.5">
+                                <span>UI/UX Design &amp; Wireframing</span>
+                                <span class="text-lavender-700">95%</span>
+                            </div>
+                            <div class="w-full h-2 bg-lavender-100 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-lavender-500 to-purple-600 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1.5">
+                                <span>Figma, Adobe XD &amp; Illustrator</span>
+                                <span class="text-lavender-700">92%</span>
+                            </div>
+                            <div class="w-full h-2 bg-lavender-100 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-lavender-500 to-purple-600 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1.5">
+                                <span>Design System &amp; Prototyping</span>
+                                <span class="text-lavender-700">88%</span>
+                            </div>
+                            <div class="w-full h-2 bg-lavender-100 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-lavender-500 to-purple-600 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1.5">
+                                <span>HTML, CSS &amp; Tailwind Dasar</span>
+                                <span class="text-lavender-700">80%</span>
+                            </div>
+                            <div class="w-full h-2 bg-lavender-100 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-lavender-500 to-purple-600 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badge Soft Skills -->
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-lavender-800 mb-3">Kompetensi &amp; Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full bg-lavender-50 text-lavender-800 border border-lavender-200 text-xs font-medium">User Research</span>
+                        <span class="px-3 py-1 rounded-full bg-lavender-50 text-lavender-800 border border-lavender-200 text-xs font-medium">Usability Testing</span>
+                        <span class="px-3 py-1 rounded-full bg-lavender-50 text-lavender-800 border border-lavender-200 text-xs font-medium">Brand Identity</span>
+                        <span class="px-3 py-1 rounded-full bg-lavender-50 text-lavender-800 border border-lavender-200 text-xs font-medium">Public Speaking</span>
+                        <span class="px-3 py-1 rounded-full bg-lavender-50 text-lavender-800 border border-lavender-200 text-xs font-medium">Manajemen Proyek</span>
+                        <span class="px-3 py-1 rounded-full bg-lavender-50 text-lavender-800 border border-lavender-200 text-xs font-medium">Notion &amp; Jira</span>
+                    </div>
+                </section>
+
+                <!-- 4. PENDIDIKAN (EDUCATION) -->
+                <section id="pendidikan" class="print-card bg-white rounded-3xl p-6 shadow-md shadow-lavender-100/60 border border-lavender-100">
+                    <div class="flex items-center gap-2.5 mb-5">
+                        <div class="w-8 h-8 rounded-xl bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                            <i class="fa-solid fa-graduation-cap text-sm"></i>
+                        </div>
+                        <h2 class="font-serif text-xl font-bold text-slate-900">Pendidikan</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="relative pl-4 border-l-2 border-lavender-300">
+                            <span class="text-xs font-semibold text-lavender-600">2018 – 2022</span>
+                            <h3 class="font-bold text-slate-900 text-sm">S1 Ilmu Komputer</h3>
+                            <p class="text-xs text-slate-600 font-medium">Universitas Indonesia, Depok</p>
+                            <p class="text-xs text-slate-500 mt-1">IPK: 3.84 / 4.00 (Cum Laude)</p>
+                        </div>
+
+                        <div class="relative pl-4 border-l-2 border-lavender-200">
+                            <span class="text-xs font-semibold text-lavender-600">2015 – 2018</span>
+                            <h3 class="font-bold text-slate-900 text-sm">Jurusan IPA</h3>
+                            <p class="text-xs text-slate-600 font-medium">SMA Negeri 8 Jakarta</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. BAHASA & SERTIFIKASI -->
+                <section class="print-card bg-white rounded-3xl p-6 shadow-md shadow-lavender-100/60 border border-lavender-100">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <div class="w-8 h-8 rounded-xl bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                            <i class="fa-solid fa-award text-sm"></i>
+                        </div>
+                        <h2 class="font-serif text-xl font-bold text-slate-900">Sertifikasi &amp; Bahasa</h2>
+                    </div>
+
+                    <ul class="space-y-2.5 text-xs text-slate-600 mb-4">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-lavender-600 mt-0.5"></i>
+                            <span><strong>Google UX Design Professional Certificate</strong> (Coursera, 2023)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-lavender-600 mt-0.5"></i>
+                            <span><strong>Certified Brand &amp; Visual Strategist</strong> (BNSP, 2024)</span>
+                        </li>
+                    </ul>
+
+                    <div class="pt-3 border-t border-lavender-100 flex justify-between text-xs">
+                        <span><strong>Bahasa Indonesia:</strong> Native</span>
+                        <span><strong>Bahasa Inggris:</strong> Fasih (TOEFL 590)</span>
+                    </div>
+                </section>
+
+            </aside>
+
+            <!-- KOLOM KANAN (8 Kolom di Desktop): Pengalaman Kerja & Portofolio -->
+            <div class="lg:col-span-8 space-y-6">
+
+                <!-- 6. PENGALAMAN KERJA (EXPERIENCE TIMELINE) -->
+                <section id="pengalaman" class="print-card bg-white rounded-3xl p-6 sm:p-8 shadow-md shadow-lavender-100/60 border border-lavender-100">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-9 h-9 rounded-xl bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                            <i class="fa-solid fa-briefcase text-base"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl font-bold text-slate-900">Pengalaman Kerja</h2>
+                    </div>
+
+                    <div class="relative border-l-2 border-lavender-200 ml-3 space-y-8">
+                        <!-- Pengalaman 1 -->
+                        <div class="relative pl-7">
+                            <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-lavender-600 ring-4 ring-lavender-100"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1.5">
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900">Senior UI/UX Designer</h3>
+                                <span class="inline-block px-3 py-0.5 rounded-full bg-lavender-100 text-lavender-800 text-xs font-semibold w-fit">
+                                    Jan 2024 – Sekarang
+                                </span>
+                            </div>
+                            <p class="text-sm font-semibold text-lavender-700 mb-2.5">PT Kreasi Digital Nusantara • Jakarta</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                                <li>Memimpin perancangan ulang aplikasi mobile e-commerce kecantikan yang berhasil meningkatkan tingkat retensi pengguna sebesar <strong>34%</strong> dalam 6 bulan.</li>
+                                <li>Membangun dan mengelola <em>Design System</em> terpadu di Figma untuk 4 produk digital perusahaan, mempercepat proses serah terima ke tim developer hingga 40%.</li>
+                                <li>Melakukan riset pengguna dan <em>A/B testing</em> berkala bersama tim Product Manager.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Pengalaman 2 -->
+                        <div class="relative pl-7">
+                            <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-lavender-400 ring-4 ring-lavender-50"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1.5">
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900">Product Designer</h3>
+                                <span class="inline-block px-3 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold w-fit">
+                                    Jul 2022 – Des 2023
+                                </span>
+                            </div>
+                            <p class="text-sm font-semibold text-lavender-700 mb-2.5">Studio Estetika Teknologi • Bandung (Remote)</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                                <li>Merancang wireframe, alur pengguna (user flow), dan prototipe interaktif untuk lebih dari 12 klien startup di bidang edutech dan gaya hidup.</li>
+                                <li>Berkolaborasi erat dengan tim pemasaran dalam merancang identitas visual kampanye digital yang menaikkan klik iklan sebesar 22%.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Pengalaman 3 -->
+                        <div class="relative pl-7">
+                            <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-lavender-300 ring-4 ring-lavender-50"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1.5">
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900">UI/UX Design Intern</h3>
+                                <span class="inline-block px-3 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold w-fit">
+                                    Jan 2022 – Jun 2022
+                                </span>
+                            </div>
+                            <p class="text-sm font-semibold text-lavender-700 mb-2.5">PT Inovasi Maju Bersama • Jakarta</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-slate-600 leading-relaxed">
+                                <li>Membantu tim desain dalam menyusun komponen antarmuka web dashboard dan melakukan audit aksesibilitas tampilan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. PORTOFOLIO / PROYEK PILIHAN -->
+                <section id="portofolio" class="print-card bg-white rounded-3xl p-6 sm:p-8 shadow-md shadow-lavender-100/60 border border-lavender-100">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                                <i class="fa-solid fa-layer-group text-base"></i>
+                            </div>
+                            <h2 class="font-serif text-2xl font-bold text-slate-900">Portofolio Pilihan</h2>
+                        </div>
+                        <span class="text-xs font-medium text-lavender-600 hidden sm:inline">Studi Kasus Terbaru</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Proyek 1 -->
+                        <article class="group rounded-2xl border border-lavender-100 bg-lavender-50/40 hover:bg-white hover:shadow-lg hover:shadow-lavender-200/40 transition overflow-hidden flex flex-col">
+                            <div class="relative h-40 overflow-hidden bg-lavender-100">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=600&q=80" 
+                                     onerror="this.onerror=null;this.src='https://placehold.co/600x320/e9d8fd/553c9a?text=Aplikasi+GlowUp';" 
+                                     alt="Aplikasi GlowUp Beauty" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur text-lavender-800 text-[11px] font-bold shadow-sm">
+                                    Mobile App UI/UX
+                                </span>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-base mb-1.5 group-hover:text-lavender-700 transition">GlowUp — Aplikasi Konsultasi Skincare</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                        Perancangan end-to-end aplikasi analisis kulit berbasis AI dan pemesanan produk perawatan wajah dengan antarmuka lembut dan ramah pengguna.
+                                    </p>
+                                </div>
+                                <div class="flex items-center justify-between pt-3 border-t border-lavender-100">
+                                    <div class="flex gap-1.5">
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-lavender-100 text-lavender-800 font-medium">Figma</span>
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-lavender-100 text-lavender-800 font-medium">UX Research</span>
+                                    </div>
+                                    <button onclick="showProjectDetail('GlowUp — Aplikasi Konsultasi Skincare', 'Proyek ini berfokus pada penyederhanaan proses konsultasi dermatologi daring. Hasil pengujian usability menunjukkan peningkatan kepuasan pengguna sebesar 92% dengan waktu penyelesaian pemesanan di bawah 90 detik.')" class="no-print text-xs font-semibold text-lavender-700 hover:text-lavender-900 inline-flex items-center gap-1 cursor-pointer">
+                                        <span>Detail</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Proyek 2 -->
+                        <article class="group rounded-2xl border border-lavender-100 bg-lavender-50/40 hover:bg-white hover:shadow-lg hover:shadow-lavender-200/40 transition overflow-hidden flex flex-col">
+                            <div class="relative h-40 overflow-hidden bg-lavender-100">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" 
+                                     onerror="this.onerror=null;this.src='https://placehold.co/600x320/d6bcfa/44337a?text=Dashboard+Finansial';" 
+                                     alt="Dashboard Manajemen Keuangan" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur text-lavender-800 text-[11px] font-bold shadow-sm">
+                                    Web Dashboard
+                                </span>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-base mb-1.5 group-hover:text-lavender-700 transition">AyuFinance — Dashboard UMKM Perempuan</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                        Sistem pencatatan arus kas dan analisis penjualan visual untuk pelaku usaha mikro kreatif agar mudah dipahami tanpa latar belakang akuntansi.
+                                    </p>
+                                </div>
+                                <div class="flex items-center justify-between pt-3 border-t border-lavender-100">
+                                    <div class="flex gap-1.5">
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-lavender-100 text-lavender-800 font-medium">Design System</span>
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-lavender-100 text-lavender-800 font-medium">Web App</span>
+                                    </div>
+                                    <button onclick="showProjectDetail('AyuFinance — Dashboard UMKM Perempuan', 'Merancang sistem visualisasi data finansial yang bersih dan intuitif bagi lebih dari 5.000 pelaku UMKM. Mengurangi kesalahan pencatatan stok harian hingga 45%.')" class="no-print text-xs font-semibold text-lavender-700 hover:text-lavender-900 inline-flex items-center gap-1 cursor-pointer">
+                                        <span>Detail</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- 8. INFORMASI KONTAK & AJAKAN KOLABORASI -->
+                <section id="kontak" class="print-card bg-gradient-to-br from-lavender-700 via-purple-700 to-lavender-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-lavender-300/50">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <h2 class="font-serif text-2xl font-bold mb-2">Mari Terhubung &amp; Berkolaborasi</h2>
+                            <p class="text-lavender-100 text-sm max-w-lg leading-relaxed">
+                                Tertarik mendiskusikan peluang kerja atau proyek kreatif? Jangan ragu untuk menghubungi saya melalui kontak di bawah ini.
+                            </p>
+                        </div>
+
+                        <div class="no-print flex flex-wrap gap-3 shrink-0">
+                            <a id="btn-wa" href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-lavender-900 hover:bg-lavender-50 font-semibold text-sm shadow transition">
+                                <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                            <a id="btn-email" href="mailto:nadia.maharani@email.com" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-lavender-600/60 hover:bg-lavender-600 text-white border border-lavender-400/50 font-semibold text-sm transition">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Kirim Email</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/15 text-xs sm:text-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-envelope text-lavender-200"></i>
+                            </div>
+                            <div class="truncate">
+                                <p class="text-lavender-200 text-xs">Email</p>
+                                <p id="footer-email" class="font-medium truncate">nadia.maharani@email.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                                <i class="fa-brands fa-linkedin-in text-lavender-200"></i>
+                            </div>
+                            <div class="truncate">
+                                <p class="text-lavender-200 text-xs">LinkedIn</p>
+                                <p id="footer-linkedin" class="font-medium truncate">linkedin.com/in/nadiaputrim</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-globe text-lavender-200"></i>
+                            </div>
+                            <div class="truncate">
+                                <p class="text-lavender-200 text-xs">Portofolio Web</p>
+                                <p class="font-medium truncate">behance.net/nadiamaharani</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Disembunyikan saat Print) -->
+    <footer class="no-print text-center py-8 text-xs text-slate-500 border-t border-lavender-100 mt-8">
+        <p>© 2026 <span id="copyright-name" class="font-semibold text-lavender-800">Nadia Putri Maharani</span>. Dibuat dengan penuh ketelitian untuk lamaran kerja profesional.</p>
+    </footer>
+
+    <!-- MODAL EDIT CEPAT (Untuk Mengubah Data CV Secara Langsung Sebelum Dicetak) -->
+    <div id="editModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-lavender-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-lavender-100 text-lavender-700 flex items-center justify-center">
+                        <i class="fa-solid fa-pen"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-900">Edit Cepat Profil CV</h3>
+                </div>
+                <button onclick="closeEditModal()" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="editForm" onsubmit="saveProfileChanges(event)" class="space-y-4 text-sm">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap &amp; Gelar</label>
+                    <input type="text" id="input-name" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Posisi yang Dilamar</label>
+                    <input type="text" id="input-role" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Domisili</label>
+                        <input type="text" id="input-location" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Nomor WhatsApp</label>
+                        <input type="text" id="input-phone" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Alamat Email</label>
+                        <input type="email" id="input-email" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">LinkedIn</label>
+                        <input type="text" id="input-linkedin" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Ringkasan Singkat (Header)</label>
+                    <textarea id="input-tagline" rows="3" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required></textarea>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Tentang Saya (Sidebar)</label>
+                    <textarea id="input-about" rows="3" class="w-full px-4 py-2 rounded-xl border border-lavender-200 focus:outline-none focus:ring-2 focus:ring-lavender-500" required></textarea>
+                </div>
+
+                <div class="flex justify-end gap-2.5 pt-3">
+                    <button type="button" onclick="closeEditModal()" class="px-5 py-2 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-6 py-2 rounded-full bg-lavender-700 hover:bg-lavender-800 text-white font-semibold shadow cursor-pointer">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DETAIL PROYEK & NOTIFIKASI TOAST -->
+    <div id="projectModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-lavender-100">
+            <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 rounded-full bg-lavender-100 text-lavender-800 text-xs font-bold">Ringkasan Studi Kasus</span>
+                <button onclick="closeProjectModal()" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <h3 id="modal-project-title" class="font-serif text-xl font-bold text-slate-900 mb-2"></h3>
+            <p id="modal-project-desc" class="text-sm text-slate-600 leading-relaxed mb-5"></p>
+            <button onclick="closeProjectModal()" class="w-full py-2.5 rounded-full bg-lavender-700 hover:bg-lavender-800 text-white text-sm font-semibold transition cursor-pointer">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Pemberitahuan -->
+    <div id="toast" class="no-print fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-sm">
+        <i class="fa-solid fa-circle-check text-lavender-400"></i>
+        <span id="toast-message">Kontak berhasil disalin!</span>
+    </div>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // Fungsi menampilkan notifikasi toast lembut
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Salin info kontak ke clipboard (Kompatibel dengan iFrame)
+        function copyContactInfo() {
+            const name = document.getElementById('cv-name').textContent.trim();
+            const email = document.getElementById('cv-email-text').textContent.trim();
+            const phone = document.getElementById('cv-phone-text').textContent.trim();
+            const textToCopy = `${name} | Email: ${email} | WhatsApp: ${phone}`;
+
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast('Informasi kontak berhasil disalin!');
+            } catch (err) {
+                showToast('Gagal menyalin kontak.');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // Kontrol Modal Edit Cepat
+        function openEditModal() {
+            document.getElementById('input-name').value = document.getElementById('cv-name').textContent.trim();
+            document.getElementById('input-role').value = document.getElementById('cv-role').textContent.trim();
+            document.getElementById('input-location').value = document.getElementById('cv-location').textContent.trim();
+            document.getElementById('input-phone').value = document.getElementById('cv-phone-text').textContent.trim();
+            document.getElementById('input-email').value = document.getElementById('cv-email-text').textContent.trim();
+            document.getElementById('input-linkedin').value = document.getElementById('cv-linkedin-text').textContent.trim();
+            document.getElementById('input-tagline').value = document.getElementById('cv-tagline').textContent.trim();
+            document.getElementById('input-about').value = document.getElementById('cv-about').textContent.trim();
+
+            const modal = document.getElementById('editModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('editModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function saveProfileChanges(event) {
+            event.preventDefault();
+            const newName = document.getElementById('input-name').value;
+            const newRole = document.getElementById('input-role').value;
+            const newLocation = document.getElementById('input-location').value;
+            const newPhone = document.getElementById('input-phone').value;
+            const newEmail = document.getElementById('input-email').value;
+            const newLinkedin = document.getElementById('input-linkedin').value;
+            const newTagline = document.getElementById('input-tagline').value;
+            const newAbout = document.getElementById('input-about').value;
+
+            document.getElementById('cv-name').textContent = newName;
+            document.getElementById('copyright-name').textContent = newName;
+            document.getElementById('cv-role').textContent = newRole;
+            document.getElementById('cv-location').textContent = newLocation;
+            document.getElementById('cv-phone-text').textContent = newPhone;
+            document.getElementById('cv-email-text').textContent = newEmail;
+            document.getElementById('footer-email').textContent = newEmail;
+            document.getElementById('cv-linkedin-text').textContent = newLinkedin;
+            document.getElementById('footer-linkedin').textContent = newLinkedin;
+            document.getElementById('cv-tagline').textContent = newTagline;
+            document.getElementById('cv-about').textContent = newAbout;
+
+            // Perbarui tautan WhatsApp dan Email
+            const cleanWa = newPhone.replace(/[^0-9]/g, '');
+            document.getElementById('btn-wa').href = `https://wa.me/${cleanWa}`;
+            document.getElementById('btn-email').href = `mailto:${newEmail}`;
+
+            closeEditModal();
+            showToast('Profil CV berhasil diperbarui!');
+        }
+
+        // Kontrol Modal Detail Proyek
+        function showProjectDetail(title, desc) {
+            document.getElementById('modal-project-title').textContent = title;
+            document.getElementById('modal-project-desc').textContent = desc;
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
